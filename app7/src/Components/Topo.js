@@ -1,0 +1,16 @@
+import React from  'react'
+import { View, Text } from 'react-native'
+
+/*export default function(props) {
+    return(
+        <View>
+            <Text> Topo </Text>
+        </View>
+    )
+}*/
+
+export default props => (
+    <View>
+        <Text> Topo </Text>
+    </View>
+)
