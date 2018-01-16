@@ -1,5 +1,6 @@
-import React from  'react'
-import { View, Text } from 'react-native'
+import React from  'react';
+import { View, Text } from 'react-native';
+import { Entrada, Comando, Operacao } from './PainelIndex';
 
 /*export default function(props) {
     return(
@@ -9,8 +10,12 @@ import { View, Text } from 'react-native'
     )
 }*/
 
-export default props => (
+const Painel = props => (
     <View>
-        <Text> Painel </Text>
+        <Entrada />
+        <Operacao />
+        <Comando />
     </View>
 )
+
+export { Painel };

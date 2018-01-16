@@ -1,5 +1,6 @@
-import React from  'react'
-import { View, Text } from 'react-native'
+import React from  'react';
+import { View, Text } from 'react-native';
+import Visor from './Visor';
 
 /*export default function(props) {
     return(
@@ -9,8 +10,8 @@ import { View, Text } from 'react-native'
     )
 }*/
 
-export default props => (
-    <View>
-        <Text> resultado </Text>
-    </View>
+const Resultado =  props => (
+    <Visor />
 )
+
+export { Resultado };
