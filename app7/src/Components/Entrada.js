@@ -4,8 +4,8 @@ import Numero from './Numero';
 
 const Entrada = props => (
     <View style = { styles.numeros }>
-         <Numero />
-         <Numero />
+         <Numero num = { props.num1 } nome = 'num1' atualizaValor = { props.atualizaValor } />
+         <Numero num = { props.num2 } nome = 'num2' atualizaValor = { props.atualizaValor } />
     </View>
 )
 

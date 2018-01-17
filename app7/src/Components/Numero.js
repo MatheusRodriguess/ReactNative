@@ -4,7 +4,9 @@ import { TextInput, StyleSheet } from 'react-native';
 export default props => (
     <TextInput 
         style = { styles.numero }
-        keyboardType = {'numeric'}    
+        keyboardType = {'numeric'}
+        value = { props.num }
+        onChangeText = { valorDoCampo => props.atualizaValor( props.nome, valorDoCampo ) }    
     />
 )
 

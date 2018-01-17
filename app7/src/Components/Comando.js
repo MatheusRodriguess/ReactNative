@@ -5,6 +5,7 @@ const Comando = props => (
     <Button 
         style = { styles.comando }
         title = 'Calcular'
+        onPress = { props.acao }
     />
 )
 
