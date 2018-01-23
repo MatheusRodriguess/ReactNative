@@ -17,21 +17,107 @@ export default class App extends Component {
     firebase.initializeApp(config);
   }
 
-    salvarDados() {
-      var database = firebase.database();
-      database.ref("pontuacao").remove();
+  cadastrarUsuario() {
+    var email = "matheusstudenty@gmail.com";
+    var senha = "novasenha123";
+
+    const usuario = firebase.auth();
+  
+    usuario.createUserWithEmailAndPassword(
+      email,
+      senha
+    ).catch(
+      erro => {
+        //erro.code
+        //erro.message
+        var mensagemErro = "";
+        if ( erro.code == "auth/weak-password"){
+          mensagemErro = "a senha precisa ter no minimo 6 caracteres";
+          alert( mensagemErro );
+        }       
+      }
+    );
+  }
+
+  verificarUsuarioLogado() {
+    const usuario = firebase.auth();
+    /*const usuarioAtual = usuario.currentUser;
+
+    if( usuarioAtual ) {
+      alert("usuario logado");
+    }
+    else
+    {
+      alert("usuario não logado");
+    }*/
+    usuario.onAuthStateChanged(
+      usuarioAtual => {
+        if( usuarioAtual ) {
+          alert("usuario logado");
+        }
+        else
+        {
+          alert("usuario não logado");
+        }
+      }
+    );
+  } 
+
+  deslogarUsuarioLogado() {
+    const usuario = firebase.auth();
+    usuario.signOut();
+  }
+  
+  logarUsuario(){
+    var email = "matheusstudenty@gmail.com";
+    var senha = "novasenha123";
+
+    const usuario = firebase.auth();
+
+    usuario.signInWithEmailAndPassword(
+      email,
+      senha
+    ).catch(
+      erro => {
+          alert( erro.message );
+        }       
+    );
+
+
   }
 
   render() {
+    
     return (
       <View>
         <Button
-          onPress = { () => { this.salvarDados(); } }
-          title = "Salvar Dados"
+          onPress = { () => { this.cadastrarUsuario(); } }
+          title = "cadastrar Usuario"
           color = "#841584"
-          accessibilityLabel="Salvar dados"
+          accessibilityLabel="cadastrar Usuario "
         />
-        <Text> Meu App </Text>
+
+        <Button
+          onPress = { () => { this.verificarUsuarioLogado(); } }
+          title = "verificar Usuario Logado "
+          color = "#841584"
+          accessibilityLabel="verificar Usuario Logado "
+        />
+
+        <Button
+          onPress = { () => { this.deslogarUsuarioLogado(); } }
+          title = "Deslogar Usuario Logado "
+          color = "#841584"
+          accessibilityLabel="deslogar Usuario Logado "
+        />
+
+        <Button
+          onPress = { () => { this.logarUsuario(); } }
+          title = "logar Usuario Logado "
+          color = "#841584"
+          accessibilityLabel="logar Usuario Logado "
+        />
+        
       </View>
     );
   }

@@ -1,0 +1,81 @@
+import firebase from 'firebase';
+import React, { Component } from 'react';
+import { View, Text, Button } from 'react-native';
+
+export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { pontuacao: '0' }
+  }
+
+  componentWillMount() {
+    var config = {
+      apiKey: "AIzaSyC9HVo_S2JmrurRZXnlhqomjyvZ9SAMuow",
+      authDomain: "projeto-teste-95588.firebaseapp.com",
+      databaseURL: "https://projeto-teste-95588.firebaseio.com",
+      projectId: "projeto-teste-95588",
+      storageBucket: "projeto-teste-95588.appspot.com",
+      messagingSenderId: "453928442304"
+    };
+
+    firebase.initializeApp(config);
+  }
+
+    salvarDados() {
+      
+      //Salvar, Alterar, e Deletar
+      
+      var funcionarios = firebase.database().ref("funcionarios");
+      //database.ref("pontuacao").remove();
+      //funcionarios.child("001").child("Nome").set("Jamilton");
+      //funcionarios.child("001").remove();
+      //funcionarios.remove();
+
+      //auto incremento
+      //funcionarios.push().child("Nome").set("Jamilton");
+
+      //com objeto literal
+      funcionarios.push().set({
+        nome: "Matheus Rodrigues",
+        altura: "1,85",
+        peso: "80KG"
+      }
+    );
+  }
+
+  listarDados() {
+    var pontuacao = firebase.database().ref("pontuacao");
+
+    pontuacao.on('value', (snapshot) => {
+      //alert( snapshot.val() );
+      var pontos = snapshot.val();
+      this.setState( { pontuacao: pontos } )
+    });
+
+  }
+
+  render() {
+    let { pontuacao } = this.state;
+    return (
+      <View>
+        <Button
+          onPress = { () => { this.salvarDados(); } }
+          title = "Salvar Dados"
+          color = "#841584"
+          accessibilityLabel="Salvar dados"
+        />
+
+        <Text> { pontuacao } </Text>
+
+        <Button
+          onPress = { () => { this.listarDados(); } }
+          title = "Listar Dados"
+          color = "#841584"
+          accessibilityLabel="Listar dados"
+        />
+        
+      </View>
+    );
+  }
+}
